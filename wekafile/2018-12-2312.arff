@@ -1,0 +1,22 @@
+@relation 2018-12-2312-weka.filters.unsupervised.attribute.Remove-R5_clustered
+
+@attribute Instance_number numeric
+@attribute time_ave numeric
+@attribute time_sd numeric
+@attribute data_ave numeric
+@attribute data_sd numeric
+@attribute Cluster {cluster0,cluster1,cluster2}
+
+@data
+0,58.186441,6.195883,466.237288,109.410181,cluster2
+1,92,57.157677,605.75,897.174001,cluster2
+2,872,1408.157307,80240.75,138828.637981,cluster0
+3,67.816327,23.601862,485.877551,313.357306,cluster2
+4,1043,839.828554,1035,0,cluster0
+5,58.033333,7.425108,2352.133333,251.409259,cluster2
+6,197,214.410821,3684.571429,2574.210606,cluster1
+7,3371,0,5530,0,cluster0
+8,557,862.561302,621,923.576202,cluster1
+9,62.490909,17.074034,1196.763636,564.366482,cluster2
+10,239.923077,288.632442,3609,2740.408476,cluster1
+11,58.033333,7.425108,228.45,79.955493,cluster2
