@@ -20,9 +20,9 @@ from xlwings.constants import FilterAllDatesInPeriod
 # from blaze.tests.dont_test_mongo import file_name
 
 # グローバル変数
-filelist = glob.glob("2018-12-2312_time/*")  # 読み込むフォルダ
+filelist = glob.glob("/wireshark_data/2018-12-2712_time/*")  # 読み込むフォルダ
 extension = '.png'  # 拡張子
-file_save_path = 'resultFigure/2018-12-2312_time/350000/'  # 図を保存するパス
+file_save_path = 'resultFigure/2018-12-2712_time/combine/'  # 図を保存するパス
 all_data_list = list()
 time_ave_list = list()
 time_sd_list = list()
@@ -33,7 +33,7 @@ data_sd_list = list()
 # 図を作る関数
 def createFigure():
     for csvfilename in filelist:
-        plt.clf()
+#         plt.clf()
         print(csvfilename)
         name, ext = os.path.splitext(os.path.basename(csvfilename))  # ファイル名と拡張子を分ける name:ファイル名,ext:拡張子
         data = pd.read_csv(csvfilename)  # ファイル読み込み
@@ -41,7 +41,7 @@ def createFigure():
         dataSet(len)
         left = data['No. ']  # 横軸の設定
         height = data['length']  # 縦軸の設定
-        plt.ylim(0, 350000)
+#         plt.ylim(0, 350000)
         plt.title(csvfilename)  # タイトルの設定
         plt.plot(left, height)  # 図の作成
        
