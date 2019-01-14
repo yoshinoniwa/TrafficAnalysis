@@ -11,6 +11,7 @@ from statistics import mean, variance, stdev
 from scipy.io import arff
 from tornado.netutil import add_accept_handler
 from xlwings.constants import FilterAllDatesInPeriod
+from astropy.units import darad
 
 
 # from statsmodels.sandbox.stats.multicomp import sd
@@ -20,36 +21,45 @@ from xlwings.constants import FilterAllDatesInPeriod
 # from blaze.tests.dont_test_mongo import file_name
 
 # グローバル変数
-filelist = glob.glob("/wireshark_data/2018-12-2712_time/*")  # 読み込むフォルダ
+day = "2016-09-30"
+file_name = "wireshark_data/"+day+"_time/*"
+filelist = glob.glob(file_name)  # 読み込むフォルダ
 extension = '.png'  # 拡張子
-file_save_path = 'resultFigure/2018-12-2712_time/combine/'  # 図を保存するパス
+file_save_path = 'resultFigure/'+day+'_time/180000/'  # 図を保存するパス
 all_data_list = list()
 time_ave_list = list()
 time_sd_list = list()
 data_ave_list = list()
 data_sd_list = list()
+ipaddress_list = list()
 # time = []
 
 # 図を作る関数
 def createFigure():
     for csvfilename in filelist:
-#         plt.clf()
+        plt.clf() #図をリセット
         print(csvfilename)
         name, ext = os.path.splitext(os.path.basename(csvfilename))  # ファイル名と拡張子を分ける name:ファイル名,ext:拡張子
         data = pd.read_csv(csvfilename)  # ファイル読み込み
         len = pd.read_csv(csvfilename, usecols=['length']).values  # データ量だけを
-        dataSet(len)
+        if 'origin' in name:
+            print(name)
+        else:
+            dataSet(len,name)
+            
+            
         left = data['No. ']  # 横軸の設定
         height = data['length']  # 縦軸の設定
-#         plt.ylim(0, 350000)
-        plt.title(csvfilename)  # タイトルの設定
+#         plt.xlim(0, 4000) #縦軸を揃える
+        plt.ylim(0, 180000) #縦軸を揃える
+#         plt.title(csvfilename)  # タイトルの設定
         plt.plot(left, height)  # 図の作成
        
     #     plt.show() #図の表示
         plt.savefig(file_save_path + name + extension)  # 図の保存
 
 #
-def dataSet(l):
+def dataSet(l,name):
     list_length = len(l)  # リストの長さ
     t_count = 0  # 0の時間カウント用
     time_list = list()  # タイミング格納
@@ -67,6 +77,7 @@ def dataSet(l):
             for len_num in num:
                 len_list.append(len_num)
 #     print(len_list)
+
     if not len_list:
         print('空です')
     else:
@@ -84,6 +95,7 @@ def dataSet(l):
         data_ave_list.append(data_ave)
         data_sd_list.append(data_sd)
         all_data_list.append(all_data)
+        ipaddress_list.append(name)
 #     print(all_data_list)
     
 # 平均
@@ -115,36 +127,11 @@ def variance(l):
     sd = math.sqrt(variance)
     return sd
 
-#データ正規化
-# def standardization(l1,l2,l3,l4):
-#     time_ave = scipy.stats.zscore(l1)
-#     time_sd = scipy.stats.zscore(l2)
-#     data_ave = scipy.stats.zscore(l3)
-#     data_sd = scipy.stats.zscore(l4)
-#     num = len(time_ave)
-#     all_data = ['time_ave','time_sd','data_ave','data_sd','class']
-#     all_data = [[0 for i in range(5)] for j in range(num)] #配列の初期化
-# #     print(all_data)
-#     for i in range(num):
-# #         print(time_ave[i])
-#         all_data[i][0] = time_ave[i]
-#         all_data[i][1] = time_sd[i]
-#         all_data[i][2] = data_ave[i]
-#         all_data[i][3] = data_sd[i]
-#         all_data[i][4] = 'label'
-# #         all_data_list.append(all_data[0])
-# #         all_data_list.append(all_data[1])
-# #         all_data_list.append(all_data[2])
-# #         all_data_list.append(all_data[3])
-# #         all_data_list.append(all_data[4])
-# #         all_data_list.append(all_data)
-#         print(all_data)
-#     print(all_data)
-#     time.append(scipy.stats.zscore(l).values)
 
 
 def createCSVFile(l):
-    f = open('wekafile/2018-12-2312.csv', 'a')
+    f_name = 'wekafile/'+day + '.csv'
+    f = open(f_name, 'a')
     title_name = ['time_ave','time_sd','data_ave','data_sd','class']
 #     writer.writerow(title_name)
     writer = csv.writer(f, lineterminator='\n')
@@ -153,20 +140,57 @@ def createCSVFile(l):
         writer.writerow(data)
     f.close()
     
-def createARFFFile(l):
-    f = open('result.arff', 'a')
-    title_name = ['time_ave','time_sd','data_ave','data_sd','class']
-#     writer.writerow(title_name)
+def createIPaddressFile(l):
+    f_name = 'ipaddress/'+day+'.txt'
+    f = open(f_name,'w')
     for data in l:
-        f.write(data)
+        f.write(data+"\n")
     f.close()
+
     
 
 createFigure()
+# createIPaddressFile(ipaddress_list)
 # standardization(time_ave_list,time_sd_list,data_ave_list,data_sd_list)
-createCSVFile(all_data_list)
-# standardization(time_sd_list)
-# standardization(data_ave_list)
-# standardization(data_sd_list)
+# createCSVFile(all_data_list)
 print(all_data_list)
-# createARFFFile(all_data_list)
+
+
+
+
+
+# #データ正規化
+# def standardization(l1,l2,l3,l4):
+#     time_ave = scipy.stats.zscore(l1)
+#     time_sd = scipy.stats.zscore(l2)
+#     data_ave = scipy.stats.zscore(l3)
+#     data_sd = scipy.stats.zscore(l4)
+#     num = len(time_ave)
+#     all_data = ['time_ave','time_sd','data_ave','data_sd','class']
+#     all_data = [[0 for i in range(5)] for j in range(num)] #配列の初期化
+#     for i in range(num):
+# #         print(time_ave[i])
+#         all_data[i][0] = time_ave[i]
+#         all_data[i][1] = time_sd[i]
+#         all_data[i][2] = data_ave[i]
+#         all_data[i][3] = data_sd[i]
+#         all_data[i][4] = 'label'
+#         all_data_list.append(all_data[0])
+#         all_data_list.append(all_data[1])
+#         all_data_list.append(all_data[2])
+#         all_data_list.append(all_data[3])
+#         all_data_list.append(all_data[4])
+# #         
+# #         print(all_data)
+#     print(all_data)
+# #     all_data_list.append(all_data)
+# #     time.append(scipy.stats.zscore(l).values)
+
+# def createARFFFile(l):
+#     f = open('result.arff', 'a')
+#     title_name = ['time_ave','time_sd','data_ave','data_sd','class']
+# #     writer.writerow(title_name)
+#     for data in l:
+#         f.write(data)
+#     f.close()
+
