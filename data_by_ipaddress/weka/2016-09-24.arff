@@ -1,0 +1,11 @@
+@relation communication_pattern
+
+@attribute timeave real
+@attribute timevar real
+@attribute kbps real
+@attribute communicationdistance real
+@attribute communicationavetime real
+@attribute realtime {high,low}
+@attribute class {streaming,no-streaming}
+
+@data
