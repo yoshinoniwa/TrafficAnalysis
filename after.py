@@ -21,7 +21,7 @@ from astropy.units import darad
 # from blaze.tests.dont_test_mongo import file_name
 
 # グローバル変数
-day = "2016-09-24"
+day = "2016-10-06"
 file_name = "data_by_ipaddress/"+day+"/cluster/*"
 filelist = sorted(glob.glob(file_name))  # 読み込むフォルダ
 extension = '.png'  # 拡張子
@@ -51,10 +51,8 @@ def createFigure():
         height = data['length']  # 縦軸の設定
 #         plt.xlim(0, 4000) #縦軸を揃える
 #         plt.ylim(0, 4000) #縦軸を揃える
-        plt.title(csvfilename)  # タイトルの設定
+#         plt.title(csvfilename)  # タイトルの設定
         plt.plot(left, height)  # 図の作成
-       
-    #     plt.show() #図の表示
         plt.savefig(file_save_path + name + extension)  # 図の保存
 
 #
@@ -63,7 +61,7 @@ def dataSet(l,name):
     t_count = 0  # 0の時間カウント用
     time_list = list()  # タイミング格納
     len_list = list()  # データ量格納
-    all_data = ['time_ave','time_sd','data_ave','data_var']
+    all_data = ['time_ave','time_sd','data_ave','data_var','ip_number']
 #     all_data_list.append(all_data)
     for num in l:
         # 秒数の差があるかないか
@@ -88,6 +86,7 @@ def dataSet(l,name):
         all_data[1] = time_sd
         all_data[2] = data_ave
         all_data[3] = data_sd
+        all_data[4] = name
 #         all_data[4] = 'label'
         time_ave_list.append(time_ave)
         time_sd_list.append(time_sd)
@@ -130,8 +129,8 @@ def variance(l):
 
 def createCSVFile(l):
     f_name = 'data_by_ipaddress/weka/'+day + '.csv'
-    f = open(f_name, 'a')
-    title_name = ['time_ave','time_sd','data_ave','data_sd']
+    f = open(f_name, 'w')
+    title_name = ['time_ave','time_sd','data_ave','data_sd','ip_number']
 #     writer.writerow(title_name)
     writer = csv.writer(f, lineterminator='\n')
     writer.writerow(title_name)
@@ -146,11 +145,9 @@ def createIPaddressFile(l):
         f.write(data+"\n")
     f.close()
 
-    
 
 createFigure()
 createIPaddressFile(ipaddress_list)
-# standardization(time_ave_list,time_sd_list,data_ave_list,data_sd_list)
 createCSVFile(all_data_list)
 print(all_data_list)
 

@@ -1,0 +1,46 @@
+@relation 72.21.207.120_clustered
+
+@attribute Instance_number numeric
+@attribute length numeric
+@attribute Cluster {cluster0,cluster1}
+
+@data
+0,3661,cluster0
+1,3755,cluster0
+2,182,cluster1
+3,3863,cluster0
+4,3755,cluster0
+5,3863,cluster0
+6,3755,cluster0
+7,3755,cluster0
+8,3755,cluster0
+9,3755,cluster0
+10,256,cluster1
+11,1009,cluster1
+12,3755,cluster0
+13,3755,cluster0
+14,3863,cluster0
+15,3755,cluster0
+16,3755,cluster0
+17,202,cluster1
+18,4985,cluster0
+19,3755,cluster0
+20,3755,cluster0
+21,3863,cluster0
+22,3755,cluster0
+23,310,cluster1
+24,1009,cluster1
+25,3755,cluster0
+26,3755,cluster0
+27,3755,cluster0
+28,182,cluster1
+29,3863,cluster0
+30,3755,cluster0
+31,3755,cluster0
+32,3863,cluster0
+33,509,cluster1
+34,1009,cluster1
+35,3755,cluster0
+36,3755,cluster0
+37,3755,cluster0
+38,3917,cluster0

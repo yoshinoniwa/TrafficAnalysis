@@ -9,7 +9,7 @@ from astropy.io.fits.convenience import writeto
 from statsmodels.compat.numpy import npc_unique
 from builtins import len
 
-day = "2016-09-24"
+day = "2016-10-06"
 csv_original_file_name =  "wireshark_data/"+day+"_time/*"
 csv_original_file_list = glob.glob(csv_original_file_name)  # 読み込むフォルダ
 arff_file_name = "data_by_ipaddress/"+day+"/weka_result/*"
@@ -28,7 +28,6 @@ l2_list = list()
 l3_list = list()
 l4_list = list()
 l5_list = list()
-
 
 
 # Arff→CSV
@@ -162,23 +161,23 @@ def comparisonCSV(l1,l2,l3,l4,l5,name):
     count = 0;
     for origin in origi_list:
 #         csv_list1.append(origin[1])
-        
-        for l in l1:
-            if origin[1] == l:
-                flag1 = 'true'
-                break
-            else:
-                flag1 = 'false'
-        if flag1 == 'true':
-            csv_list1.append(origin[1])
-            count += 1
-        elif flag1 == 'false':
-            csv_list1.append(0)
+        if len(l1)>0:
+            for l in l1:
+                if origin[1] == l:
+                    flag1 = 'true'
+                    break
+                else:
+                    flag1 = 'false'
+            if flag1 == 'true':
+                csv_list1.append(origin[1])
+            elif flag1 == 'false':
+                csv_list1.append(0)
         
         if len(l2)>0:
             for l in l2:
                 if origin[1] == l:
                     flag2 = 'true'
+                    count += 1
                     break
                 else:
                     flag2 = 'false'

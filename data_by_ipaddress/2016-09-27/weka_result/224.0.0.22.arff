@@ -1,0 +1,25 @@
+@relation 224.0.0.22_clustered
+
+@attribute Instance_number numeric
+@attribute length numeric
+@attribute Cluster {cluster0,cluster1}
+
+@data
+0,216,cluster1
+1,216,cluster1
+2,270,cluster0
+3,162,cluster1
+4,270,cluster0
+5,216,cluster1
+6,270,cluster0
+7,216,cluster1
+8,216,cluster1
+9,216,cluster1
+10,270,cluster0
+11,270,cluster0
+12,216,cluster1
+13,216,cluster1
+14,216,cluster1
+15,216,cluster1
+16,216,cluster1
+17,216,cluster1
