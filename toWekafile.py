@@ -18,7 +18,7 @@ from _tkinter import create
 # from bitarray._bitarray import length
 
 # グローバル変数
-day = "2016-10-06"
+day = "2016-10-07"
 file_name = "data_by_ipaddress/weka/"+day+".csv"
 all_data_list = list()
 data_format_list = list()

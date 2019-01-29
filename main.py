@@ -21,11 +21,11 @@ from astropy.units import darad
 # from blaze.tests.dont_test_mongo import file_name
 
 # グローバル変数
-day = "2016-10-12"
+day = "2016-10-05"
 file_name = "wireshark_data/"+day+"_time/*"
 filelist = glob.glob(file_name)  # 読み込むフォルダ
 extension = '.png'  # 拡張子
-file_save_path = 'resultFigure/'+day+'_time/180000/'  # 図を保存するパス
+file_save_path = 'resultFigure/'+day+'_time/separate/'  # 図を保存するパス
 all_data_list = list()
 time_ave_list = list()
 time_sd_list = list()
@@ -51,7 +51,7 @@ def createFigure():
         left = data['No. ']  # 横軸の設定
         height = data['length']  # 縦軸の設定
 #         plt.xlim(0, 4000) #縦軸を揃える
-        plt.ylim(0, 60000) #縦軸を揃える
+#         plt.ylim(0, 180000) #縦軸を揃える
 #         plt.title(csvfilename)  # タイトルの設定
         plt.plot(left, height)  # 図の作成
        
