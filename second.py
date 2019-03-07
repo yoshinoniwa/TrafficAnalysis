@@ -15,7 +15,7 @@ from astropy.units import darad
 # from bitarray._bitarray import length
 
 # グローバル変数
-day = "2016-10-12"
+day = "19-02-20"
 file_name = "wireshark_data/"+day+"_time/*"
 filelist = glob.glob(file_name)  # 読み込むフォルダ
 extension = '.png'  # 拡張子

@@ -18,7 +18,7 @@ from _tkinter import create
 # from bitarray._bitarray import length
 
 # グローバル変数
-day = "2016-10-07"
+day = "19-02-20"
 file_name = "data_by_ipaddress/weka/"+day+".csv"
 all_data_list = list()
 data_format_list = list()
@@ -38,6 +38,8 @@ def comparisionIP(ip):
     ipaddress_list = list(set(lst))
     return ipaddress_list
 
+
+
 #ipアドレスごとにデータをセット
 def dataSet(d_lst,ip_lst):
     data_list = d_lst
@@ -52,6 +54,7 @@ def dataSet(d_lst,ip_lst):
                 count +=1
         all_list.append(set_list) 
     return all_list 
+    
     
 def dataFormatSet(lst):
     count = 0
@@ -129,8 +132,9 @@ def dataFormatSet(lst):
     createDatabyIPaddressFile(ip_lst)
     return d_f_list
 
+#CSVファイル作成
 def createCSVFile(l):
-    f_name = 'data_by_ipaddress/weka/'+day+'_input' + '.csv'
+    f_name = 'data_by_ipaddress/weka/'+day+'_input' + '.csv' #保存先
     f = open(f_name, 'w')
     title_name = ['time_ave1','time_sd1','data_ave1','data_sd1','time_ave2','time_sd2','data_ave2','data_sd2','cluster_num']
 #     writer.writerow(title_name)

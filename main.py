@@ -1,3 +1,4 @@
+
 import csv
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -21,11 +22,11 @@ from astropy.units import darad
 # from blaze.tests.dont_test_mongo import file_name
 
 # グローバル変数
-day = "2016-10-05"
-file_name = "wireshark_data/"+day+"_time/*"
-filelist = glob.glob(file_name)  # 読み込むフォルダ
+day = "19-02-20" #ファイル名　#★
+file_name = "wireshark_data/"+day+"_time/*" #入力ファイルのファイルパス
+filelist = glob.glob(file_name)  # ファイルの読み込み
 extension = '.png'  # 拡張子
-file_save_path = 'resultFigure/'+day+'_time/separate/'  # 図を保存するパス
+file_save_path = 'resultFigure/'+day+'_time/'  # 図を保存するパス
 all_data_list = list()
 time_ave_list = list()
 time_sd_list = list()
@@ -38,7 +39,6 @@ ipaddress_list = list()
 def createFigure():
     for csvfilename in filelist:
         plt.clf() #図をリセット
-        print(csvfilename)
         name, ext = os.path.splitext(os.path.basename(csvfilename))  # ファイル名と拡張子を分ける name:ファイル名,ext:拡張子
         data = pd.read_csv(csvfilename)  # ファイル読み込み
         len = pd.read_csv(csvfilename, usecols=['length']).values  # データ量だけを
@@ -46,15 +46,12 @@ def createFigure():
             print(name)
         else:
             dataSet(len,name)
-            
-            
         left = data['No. ']  # 横軸の設定
         height = data['length']  # 縦軸の設定
-#         plt.xlim(0, 4000) #縦軸を揃える
-#         plt.ylim(0, 180000) #縦軸を揃える
+#         plt.xlim(0, 90000) #横軸を揃える
+        plt.ylim(0, 600000) #縦軸を揃える
 #         plt.title(csvfilename)  # タイトルの設定
-        plt.plot(left, height)  # 図の作成
-       
+        plt.plot(left, height)  # 図の作成 
     #     plt.show() #図の表示
         plt.savefig(file_save_path + name + extension)  # 図の保存
 
@@ -76,8 +73,6 @@ def dataSet(l,name):
             t_count = 0
             for len_num in num:
                 len_list.append(len_num)
-#     print(len_list)
-
     if not len_list:
         print('空です')
     else:
@@ -128,20 +123,20 @@ def variance(l):
     return sd
 
 
-
+#CSVファイル作成
 def createCSVFile(l):
-    f_name = 'wekafile/'+day + '.csv'
+    f_name = 'wekafile/'+day + '.csv' #保存先のパス
     f = open(f_name, 'a')
-    title_name = ['time_ave','time_sd','data_ave','data_sd','class']
-#     writer.writerow(title_name)
+    title_name = ['time_ave','time_sd','data_ave','data_sd','class']#CSVの一番上の部分
     writer = csv.writer(f, lineterminator='\n')
     writer.writerow(title_name)
     for data in l:
         writer.writerow(data)
     f.close()
-    
+
+#IP青ドレスだけを記載するファイル
 def createIPaddressFile(l):
-    f_name = 'ipaddress/'+day+'.txt'
+    f_name = 'ipaddress/'+day+'.txt'#保存先のパス
     f = open(f_name,'w')
     for data in l:
         f.write(data+"\n")

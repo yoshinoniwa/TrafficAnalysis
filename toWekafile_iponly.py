@@ -21,7 +21,7 @@ from astropy.units import darad
 # from blaze.tests.dont_test_mongo import file_name
 
 # グローバル変数
-day = "2016-10-06"
+day = "19-02-20"
 file_name = "wireshark_data/"+day+"_time/*"
 filelist = glob.glob(file_name)  # 読み込むフォルダ
 extension = '.png'  # 拡張子

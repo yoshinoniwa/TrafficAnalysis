@@ -9,7 +9,7 @@ from astropy.io.fits.convenience import writeto
 from statsmodels.compat.numpy import npc_unique
 from builtins import len
 
-day = "2016-10-07"
+day = "19-02-20"
 csv_original_file_name =  "wireshark_data/"+day+"_time/*"
 csv_original_file_list = glob.glob(csv_original_file_name)  # 読み込むフォルダ
 arff_file_name = "data_by_ipaddress/"+day+"/weka_result/*"

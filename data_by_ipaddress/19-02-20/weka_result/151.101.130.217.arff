@@ -1,0 +1,17 @@
+@relation 151.101.130.217_clustered
+
+@attribute Instance_number numeric
+@attribute length numeric
+@attribute Cluster {cluster0,cluster1}
+
+@data
+0,3253,cluster0
+1,132,cluster1
+2,66,cluster1
+3,66,cluster1
+4,132,cluster1
+5,66,cluster1
+6,66,cluster1
+7,132,cluster1
+8,66,cluster1
+9,66,cluster1

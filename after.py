@@ -21,7 +21,7 @@ from astropy.units import darad
 # from blaze.tests.dont_test_mongo import file_name
 
 # グローバル変数
-day = "2016-10-07"
+day = "19-02-20"
 file_name = "data_by_ipaddress/"+day+"/cluster/*"
 filelist = sorted(glob.glob(file_name))  # 読み込むフォルダ
 extension = '.png'  # 拡張子
@@ -49,8 +49,8 @@ def createFigure():
             
         left = data['No. ']  # 横軸の設定
         height = data['length']  # 縦軸の設定
-#         plt.xlim(0, 4000) #縦軸を揃える
-        plt.ylim(0, 7000) #縦軸を揃える
+        plt.xlim(0, 90000) #縦軸を揃える
+        plt.ylim(0, 350000) #縦軸を揃える
 #         plt.title(csvfilename)  # タイトルの設定
         plt.plot(left, height)  # 図の作成
         plt.savefig(file_save_path + name + extension)  # 図の保存
@@ -147,7 +147,7 @@ def createIPaddressFile(l):
 
 
 createFigure()
-# createIPaddressFile(ipaddress_list)
-# createCSVFile(all_data_list)
+createIPaddressFile(ipaddress_list)
+createCSVFile(all_data_list)
 print(all_data_list)
 
